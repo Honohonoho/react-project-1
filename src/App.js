@@ -1,21 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      newTodo: 'text',
+      todoList: [
+        {id: 1, title: '第一个待办'}
+      ]
+    }
+  }
+
   render() {
+    let willdo = this.state.newTodo.map((item,index)=>{
+      return <li>{item.title}</li>
+    })
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <h1>我的待办</h1>
+        <div className="inputArea">
+          <input type="text" value={this.state.newTodo}/>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <ol>
+          {willdo}
+        </ol>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+//export default App;
