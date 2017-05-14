@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
 import 'normalize.css';
 import './reset.css';
+import './App.css';
 import todoInput from './todoInput';
 import todoItem from './todoItem';
 
@@ -12,7 +12,7 @@ class App extends Component {
       newTodo: 'text',
       todoList: [
         {id: 1, title: '第一个待办'},
-        {id: 2, title: '第二个待办'}
+        {id: 2, title: '第二个待办'},
       ]
     }
   }
