@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import 'normalize.css';
 import todoInput from './todoInput';
 import todoItem from './todoItem';
 
@@ -16,7 +17,7 @@ class App extends Component {
   }
 
   render() {
-    let willdo = this.state.newTodo.map((item,index)=>{
+    let willdo = this.state.todoList.map((item,index)=>{
       return ( //多个节点时需要加括号,<li>的数量取决于todoList
         <li>
           <todoItem todo={item} />

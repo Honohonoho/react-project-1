@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://honohonoho.github.io/react-project-1/build",
   "dependencies": {
+    "normalize.css": "^7.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },
