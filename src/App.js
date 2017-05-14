@@ -18,7 +18,7 @@ class App extends Component {
     let willdo = this.state.todoList.map((item,index)=>{
       return ( //多个节点时需要加括号,<li>的数量取决于todoList
         <li key={index}>
-          <TodoItem todo={item} />
+          <TodoItem todo={item} onToggle={this.toggle.bind(this)}/>
         </li>
       )
     })
@@ -37,6 +37,10 @@ class App extends Component {
         </ol>
       </div>
     )
+  }
+  toggle(e,todo){
+    todo.status = todo.status === 'completed' ? '' : 'completed'
+    this.setState(this.state)
   }
   changeTitle(event){
     this.setState({
