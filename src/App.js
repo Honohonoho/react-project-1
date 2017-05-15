@@ -20,7 +20,7 @@ class App extends Component {
     let willdo = this.state.todoList
       .filter((item)=> !item.deleted)
       .map((item,index)=>{
-      return ( //多个节点时需要加括号,<li>的数量取决于todoList
+      return ( 
         <li key={index}>
           <TodoItem 
             todo={item} 
@@ -61,7 +61,7 @@ class App extends Component {
   }
   addTodo(event){
     this.state.todoList.push({
-      id: idMarker(),
+      id: idMaker(),
       title: event.target.value,
       status: null,
       deleted: false
@@ -80,7 +80,7 @@ class App extends Component {
 export default App;
 
 let id = 0;
-function idMarker() {
+function idMaker() {
   id += 1;
   return id;
 }
