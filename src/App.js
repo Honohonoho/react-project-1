@@ -20,18 +20,20 @@ class App extends Component {
       .map((item,index)=>{
       return ( //多个节点时需要加括号,<li>的数量取决于todoList
         <li key={index}>
-          <TodoItem todo={item} onToggle={this.toggle.bind(this)}
+          <TodoItem 
+            todo={item} 
+            onToggle={this.toggle.bind(this)}
             onDelete={this.delete.bind(this)}/>
         </li>
       )
     })
 
-
     return (
       <div className="App">
         <h1>我的待办</h1>
         <div className="inputArea">
-          <TodoInput content={this.state.newTodo}
+          <TodoInput 
+            content={this.state.newTodo}
             onChange={this.changeTitle.bind(this)}
             onSubmit={this.addTodo.bind(this)}/>
         </div>
@@ -41,6 +43,7 @@ class App extends Component {
       </div>
     )
   }
+  
   toggle(e,todo){
     todo.status = todo.status === 'completed' ? '' : 'completed'
     this.setState(this.state)
