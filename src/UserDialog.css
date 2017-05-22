@@ -23,7 +23,7 @@
 }
 .UserDialog > nav:first-child label{
 	margin-left: 2em;
-	cursor: pointer;;
+	cursor: pointer;
 }
 .UserDialog > nav:first-child input[type=radio]:not(:first-child){
 	margin-left: 2em;
