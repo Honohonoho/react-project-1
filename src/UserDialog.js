@@ -36,7 +36,7 @@ export default class UserDialog extends Component{
 					alert('用户名不能含有空格')
 					break
 				default:
-					alert(error.code)
+					alert(error)
 					break
 			}
 		}
@@ -60,7 +60,7 @@ export default class UserDialog extends Component{
 					alert('登录失败次数超过限制，请稍候再试，或者通过忘记密码重设密码。')
 					break
 				default:
-					alert(error.code)
+					alert(error)
 					break
 			}
 		}
