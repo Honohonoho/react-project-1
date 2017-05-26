@@ -19,14 +19,15 @@ export function signUp(username,password,successFn,errorFn){
 	//user.setEmail();
 	user.signUp().then(function(loginedUser){
 		console.log(loginedUser);
-		let user = getUserFormAVUser(loginedUser)
+		let user = getUserFromAVUser(loginedUser)
+		console.log(user)
 		successFn.call(null,user)
 	},function(error){
 		errorFn.call(null,error)
 	})
 	return undefined
 }
-function getUserFormAVUser(AVUser){
+function getUserFromAVUser(AVUser){
 	return{
 		id: AVUser.id,
 		...AVUser.attributes
