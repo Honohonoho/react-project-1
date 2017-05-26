@@ -6,7 +6,7 @@ export default class UserDialog extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			selected: 'signIn',
+			selected: 'signUp',
 			formData: {
 				username: '',
 				password: ''
@@ -20,7 +20,7 @@ export default class UserDialog extends Component{
 	}
 	signUp(e){
 		e.preventDefault()
-		let {username,password} = this.state.formData;
+		let {username,password} = this.state.formData
 		let success = (user)=>{
 			console.log(user)
 		}
@@ -32,7 +32,7 @@ export default class UserDialog extends Component{
 	signIn(e){}
 	changeFormData(key,e){
 		let stateCopy = JSON.parse(JSON.stringify(this.state))
-		stateCopy.formData[key] = e.target.valiue;
+		stateCopy.formData[key] = e.target.value;
 		this.setState(stateCopy)
 	}
 	render(){
