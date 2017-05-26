@@ -26,11 +26,17 @@ export default class UserDialog extends Component{
 		}
 		let error = (error)=>{
 			switch(error.code){
+				case 200:
+					alert('没有提供用户名，或者用户名为空')
+					break
 				case 202:
 					alert('用户名被人占用啦    ╮(╯_╰)╭')
 					break
+				case 217:
+					alert('用户名不能含有空格')
+					break
 				default:
-					alert(error)
+					alert(error.code)
 					break
 			}
 		}
@@ -45,10 +51,16 @@ export default class UserDialog extends Component{
 		let error = (error)=>{
 			switch(error.code){
 				case 210:
-					alert('用户名与或密码输错啦	 ╮(╯_╰)╭')
+					alert('用户名与或密码输错啦╮(╯_╰)╭')
+					break
+				case 211:
+					alert('用户名输错啦╮(╯_╰)╭')
+					break	
+				case 219:
+					alert('登录失败次数超过限制，请稍候再试，或者通过忘记密码重设密码。')
 					break
 				default:
-					alert(error)
+					alert(error.code)
 					break
 			}
 		}
