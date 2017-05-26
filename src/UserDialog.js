@@ -5,14 +5,14 @@ export default class UserDialog extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			selected: 'signUp',
+			selected: 'signIn',
 			formData: {
 				username: '',
 				password: ''
 			}
 		}
 	}
-	swicth(e){
+	switch(e){
 		this.setState({
 			selected: e.target.value
 		})
@@ -20,12 +20,12 @@ export default class UserDialog extends Component{
 	signUp(e){}
 	signIn(e){}
 	changeUsername(e){
-		let stateCopy = JSON.prase(JSON.stringify(this.state)) //用JSON深拷贝
-		stateCopy.formData.password = e.target.value;
+		let stateCopy = JSON.parse(JSON.stringify(this.state)) //用JSON深拷贝
+		stateCopy.formData.username = e.target.value;
 		this.setState(stateCopy)
 	}
-	changePsaaword(e){
-		let stateCopy = JSON.parse(JSON.srtingify(this.state))
+	changePassword(e){
+		let stateCopy = JSON.parse(JSON.stringify(this.state))
 		stateCopy.formData.password = e.target.value;
 		this.setState(stateCopy)
 	}
@@ -40,7 +40,7 @@ export default class UserDialog extends Component{
 				<div className="row">
 					<label>密码</label>
 					<input type="password" value={this.state.formData.password}
-						onChange={this.changePsaaword.bind(this)} />
+						onChange={this.changePassword.bind(this)} />
 				</div>
 				<div className="row actions">
 					<button type="submit">注册</button>
@@ -57,7 +57,7 @@ export default class UserDialog extends Component{
 				<div className="row">
 					<label>密码</label>
 					<input type="password" value={this.state.formData.password}
-						onChange={this.changePsaaword.bind(this)} />
+						onChange={this.changePassword.bind(this)} />
 				</div>
 				<div className="row actions">
 					<button type="submit">登录</button>
@@ -73,7 +73,7 @@ export default class UserDialog extends Component{
 					</nav>
 					<div className="panes">
 						{this.state.selected === 'signUp' ? signUpForm : null}
-						{this.state.selected === 'sighIn' ? signInForm : null}
+						{this.state.selected === 'signIn' ? signInForm : null}
 					</div>
 				</div>
 			</div>
