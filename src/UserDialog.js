@@ -119,12 +119,12 @@ export default class UserDialog extends Component{
 						<p>欢迎使用 ToDoList</p>
 					</div>
 					<nav onChange={this.switch.bind(this)}>
-						<label>
-							<input type="radio" value="signUp"
+						<label className={this.state.selected === 'signUp' ? "checked" : null}>
+							<input type="radio" value="signUp" 
 								checked={this.state.selected === 'signUp'}
 								onChange={this.switch.bind(this)} />注册
 						</label>
-						<label>
+						<label className={this.state.selected === 'signIn' ? "checked" : null}>
 							<input type="radio" value="signIn"
 								checked={this.state.selected === 'signIn'}
 								onChange={this.switch.bind(this)} />登录

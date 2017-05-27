@@ -34,12 +34,17 @@
 	width: 10em;
 	margin: 2em auto 0 auto;
 }
-.UserDialog > nav>label:first-child{
-	border-right: 1px solid #565656;
-}
 .UserDialog > nav> label{
 	cursor: pointer;
-	padding: .5em 1em;
+	padding: .5em 12px .5em 0;
+}
+.UserDialog > nav>.checked{
+	background: #8a8a8a;
+    color: #333;
+    border-radius: 4px;
+}
+.UserDialog > nav> label>input{
+	visibility: hidden;
 }
 .UserDialog > .panes{
 	padding: 0 1em 1em;
