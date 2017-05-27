@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './UserDialog.css';
 import {signUp,signIn} from './leanCloud';
+import Logo from './img/list-todo(2).png';
 
 export default class UserDialog extends Component{
 	constructor(props){
@@ -76,12 +77,14 @@ export default class UserDialog extends Component{
 			<form className="signUp" onSubmit={this.signUp.bind(this)}> {/*注册*/}
 				<div className="row">
 					<label>用户名</label>
-					<input type="text" value={this.state.formData.username}
+					<input type="text" autoFocus="autofocus" placeholder="请输入用户名"
+						value={this.state.formData.username}
 						onChange={this.changeFormData.bind(this,'username')} /> {/* bind 不仅可以绑定 this，还可以绑定第一个参数 */}
 				</div>
 				<div className="row">
 					<label>密码</label>
-					<input type="password" value={this.state.formData.password}
+					<input type="password" placeholder="请输入密码"
+						value={this.state.formData.password}
 						onChange={this.changeFormData.bind(this,'password')} />
 				</div>
 				<div className="row actions">
@@ -93,12 +96,14 @@ export default class UserDialog extends Component{
 			<form className="signIn" onSubmit={this.signIn.bind(this)}> {/*登录*/}
 				<div className="row">
 					<label>用户名</label>
-					<input type="text" value={this.state.formData.username}
+					<input type="text" autoFocus="autofocus" placeholder="请输入用户名"
+						value={this.state.formData.username}
 						onChange={this.changeFormData.bind(this,'username')} />
 				</div>
 				<div className="row">
 					<label>密码</label>
-					<input type="password" value={this.state.formData.password}
+					<input type="password" placeholder="请输入密码"
+						value={this.state.formData.password}
 						onChange={this.changeFormData.bind(this,'password')} />
 				</div>
 				<div className="row actions">
@@ -109,16 +114,20 @@ export default class UserDialog extends Component{
 		return (
 			<div className="UserDialog-Wrapper">
 				<div className="UserDialog">
+					<div className="Logo">
+						<img src={Logo} alt=""/>
+						<p>欢迎使用 ToDoList</p>
+					</div>
 					<nav onChange={this.switch.bind(this)}>
 						<label>
 							<input type="radio" value="signUp"
 								checked={this.state.checked === 'signUp'}
-								onChange={this.switch.bind(this)} /> 注册
+								onChange={this.switch.bind(this)} />注册
 						</label>
 						<label>
 							<input type="radio" value="signIn"
 								checked={this.state.checked === 'signIn'}
-								onChange={this.switch.bind(this)} /> 登录
+								onChange={this.switch.bind(this)} />登录
 						</label>
 					</nav>
 					<div className="panes">

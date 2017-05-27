@@ -9,37 +9,77 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background: #333;
 }
 .UserDialog{ 
 	border-radius: 4px;
-	min-width: 20em;
-	background: #fff;
-	border: 1px solid #aaa;
+	min-width: 50em;
+	background: #333;
+	color: #8a8a8a;
 	box-shadow: 0 0 1em hsla(0,0%,0%,0.35);
 }
-.UserDialog > nav:first-child{
-	padding: 1em;
-	margin-left: -2em;
+.UserDialog .Logo{
+	border-bottom: 1px solid #565656;
+	padding-bottom: 2em;
 }
-.UserDialog > nav:first-child label{
-	margin-left: 2em;
+.UserDialog .Logo>img{
+	margin-left: 3em;
+}
+.UserDialog .Logo>p{
+	font-size: 3em;
+	color: #8a8a8a;
+}
+.UserDialog > nav{
+	width: 10em;
+	margin: 2em auto 0 auto;
+}
+.UserDialog > nav>label:first-child{
+	border-right: 1px solid #565656;
+}
+.UserDialog > nav> label{
 	cursor: pointer;
+	padding: .5em 1em;
 }
 .UserDialog > nav:first-child input[type=radio]:not(:first-child){
 	margin-left: 2em;
 }
 .UserDialog > .panes{
 	padding: 0 1em 1em;
+	margin-top: 2em;
 }
 .UserDialog form>.row{
 	display: flex;
 	padding: .3em 0;
 }
+.UserDialog form>.row>input{
+	width: 100%;
+	height: 2em;
+	padding-left: .75em;
+	background: #565656;
+	border: none;
+	outline: none;
+}
+.UserDialog form>.row>input:focus{
+	background: #fff;
+}
 .UserDialog form>.row>label:first-child{
 	width: 4em;
+	font-size: 1em;
+	line-height: 2em;
 }
 .UserDialog form>.row.actions{
-	/*padding-left: 4em;*/
-	/*text-align: center;*/
 	display: inline-block;
+	color: #8a8a8a;
+}
+.UserDialog form>.actions>button{
+	background: #333;
+	color: #8a8a8a;
+	padding: .5em 1em;
+	border: 1px solid #565656;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.UserDialog form>.actions>button:hover{
+	background: #dbdbdb;
+	color: #333;
 }
