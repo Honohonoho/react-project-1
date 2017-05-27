@@ -121,12 +121,12 @@ export default class UserDialog extends Component{
 					<nav onChange={this.switch.bind(this)}>
 						<label>
 							<input type="radio" value="signUp"
-								checked={this.state.checked === 'signUp'}
+								checked={this.state.selected === 'signUp'}
 								onChange={this.switch.bind(this)} />注册
 						</label>
 						<label>
 							<input type="radio" value="signIn"
-								checked={this.state.checked === 'signIn'}
+								checked={this.state.selected === 'signIn'}
 								onChange={this.switch.bind(this)} />登录
 						</label>
 					</nav>
