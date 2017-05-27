@@ -30,9 +30,10 @@ class App extends Component {
 		})
 		return (
 			<div className="App">
-				<h1>{this.state.user.username || '我'}的待办
-					{this.state.user.id ? <button onClick={this.signOut.bind(this)}>注销</button> : null}
+				<h1>{this.state.user.username || '我'}的待办事项
+					
 				</h1>
+				{this.state.user.id ? <button onClick={this.signOut.bind(this)}>注销</button> : null}
 				<div className="inputWrapper">
 					<TodoInput content={this.state.newTodo}
 						onChange={this.changeTitle.bind(this)}

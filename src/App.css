@@ -3,16 +3,38 @@
   color: #333;
   border: 1px solid #aaa;
   border-radius: 4px;
-  background: #fff;
-  margin: 2em;
+  background: #eee;
+  margin: 2em auto;
   padding: 0 1em;
   min-height: 20em;
   min-width: 32em;
   box-shadow: 0 0 1em hsla(0,0%,0%,0.15);
 }
-.App>.todoList>li:nth-child(odd){
+.App>.inputWrapper>input{
+  outline: none;
+}
+.App>h1{
+  color: #333;
+  font-size: 2em;
+  display: inline-block;
+  padding: 0 3em 0 4em;
+}
+.App>.todoList>li{
+  background-color: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0 0 .75em #333;
+  margin-bottom: 1em;
+}
+.App>.todoList>li>.ToDoItem>.title{
+  color: #333;
+}
+.App>.todoList>li>.ToDoItem>button{
+  border: 1px solid #333;
+  border-radius: 50%;
+}
+/*.App>.todoList>li:nth-child(odd){
   background: #eee;
-}
-.App>.todoList>li:nth-child(even){
+}*/
+/*.App>.todoList>li:nth-child(even){
   background: transparent;
-}
+}*/
