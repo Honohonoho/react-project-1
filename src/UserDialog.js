@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './UserDialog.css';
 import {signUp,signIn} from './leanCloud';
-import Logo from './img/list-todo(2).png';
+import Logo from './img/list-todo.png';
 
 export default class UserDialog extends Component{
 	constructor(props){
