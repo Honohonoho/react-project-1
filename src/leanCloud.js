@@ -28,7 +28,7 @@ export function signUp(username,password,successFn,errorFn){
 function getUserFromAVUser(AVUser){
 	return{
 		id: AVUser.id,
-		...AVUser.attributes
+		...AVUser.attributes //...是展开运算符，可以把数组转化为参数序列
 	}
 }
 export function getCurrentUser(){
@@ -77,5 +77,22 @@ export function saveToDoList(item,user,successFn,errorFn){
 	},function(error){
 		errorFn.call(null)
 		alert('error')
+	})
+}
+export function loadToDoList(user,successFn,errorFn){
+	var list = []
+	AV.Query.doCloudQuery(`select * from ${user.username}`)
+	.then( function(data){ // results 即为查询结果，它是一个 AV.Object 数组
+		for(let i=0; i<data.results.length; i++){
+			let obj = {
+				id: data.results[i].id,
+				...data.results[i].attributes
+			}
+			list.push(obj)
+		}
+		successFn.call(null,list)
+	},function(error){
+		console.log(error)
+		errorFn.call(null)
 	})
 }

@@ -5,7 +5,7 @@ import './App.css';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import UserDialog from './UserDialog';
-import {getCurrentUser, signOut, saveToDoList, updateToDoList} from './leanCloud';
+import {getCurrentUser, signOut, saveToDoList, updateToDoList, loadToDoList} from './leanCloud';
 
 
 class App extends Component {
@@ -17,6 +17,7 @@ class App extends Component {
 			todoList: []
 		}
 	}
+	
 	render(){
 		let todos = this.state.todoList
 			.filter((item)=> !item.deleted)
@@ -51,6 +52,17 @@ class App extends Component {
 			</div>
 		)
 	}
+	componentWillMount(){
+		function success(list){
+			this.state.todoList = list
+			this.setState({
+				todoList: this.state.todoList
+			})
+		}
+		function error(){
+		}
+		loadToDoList(this.state.user,success.bind(this),error) //success.bind(this)和addToDo中success箭头函数实现的效果一样。。。
+	}
 	signOut(){
 		signOut()
 		let stateCopy = JSON.parse(JSON.stringify(this.state))
@@ -69,8 +81,6 @@ class App extends Component {
 		todo.status = todo.status === 'completed' ? '' : 'completed'
 		this.setState(this.state)
 		console.log('调用toggle：')
-        console.log(this.state.user)
-		console.log('要调用update了')
 		updateToDoList(this.state.user,todo.id,'status',todo.status)
 	}
 	changeTitle(event){
@@ -87,7 +97,6 @@ class App extends Component {
 			deleted: false
 		}
 		let success = (objId)=>{
-			console.log(event)
 			newItem.id = objId
 			this.state.todoList.push(newItem) //先保存至leanCloud，后添加至todoList
 			this.setState({
@@ -103,7 +112,6 @@ class App extends Component {
 	delete(event,todo){ //删除和标记已完成都是调用updateList()
 		todo.deleted = true;
 		this.setState(this.state)
-		console.log('要调用update了')
 		updateToDoList(this.state.user,todo.id,'deleted',todo.deleted)
 	}
 	
@@ -111,8 +119,3 @@ class App extends Component {
 
 export default App;
 
-let id = 0;
-function idMaker(){
-	id +=1;
-	return id
-}
