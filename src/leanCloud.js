@@ -51,3 +51,26 @@ export function signIn(username,password,successFn,errorFn){
 		errorFn.call(null,error)
 	})
 }
+export function updateToDoList(username,itemid,key,value){
+	var className = 'todoitem:' + username.id
+	var todoitem = AV.Object.createWithoutData(className,itemid)
+	todoitem.set(key,value)
+}
+export function saveToDoList(item,user,successFn,errorFn){
+	// 声明类型
+	var TodoList = AV.Object.extend('todo' + user.id) 
+	// 新建对象
+	var todoList = new TodoList()
+	// 设置todoList各项属性
+	todoList.set('name', user.name)
+	todoList.set('title', item.title)
+	todoList.set('status', item.status)
+	todoList.set('deleted', item.deleted)
+	todoList.save().then( function(todo){
+		successFn.call(null,todo.id)
+		alert('保存成功')
+	},function(error){
+		errorFn.call(null)
+		alert('error')
+	})
+}
