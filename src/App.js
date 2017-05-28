@@ -81,44 +81,30 @@ class App extends Component {
 	}
 	addTodo(event){ //添加调用saveList()
 		var newItem = {
-			id: idMaker(),
+			id: '',
 			title: event.target.value,
-			status: '',
+			status: null,
 			deleted: false
 		}
-		this.state.todoList.push({ //先添加后保存
-			id: newItem.id,
-			title: newItem.title,
-			status: newItem.status,
-			deleted: newItem.deleted
-		})
-		this.setState({
-			newTodo: '',
-			todoList: this.state.todoList
-		})
-		console.log('已添加')
-		function success(todoId){
-			console.log(this)
-			newItem.id = todoId
-			this.state.todoList.push(newItem)
+		let success = (objId)=>{
+			console.log(event)
+			newItem.id = objId
+			this.state.todoList.push(newItem) //先保存至leanCloud，后添加至todoList
 			this.setState({
-				newtodo: '',
+				newTodo: '',
 				todoList: this.state.todoList
 			})
+			console.log('已添加')
 		}
 		function error(){
-
 		}
-		console.log('要调用save了')
 		saveToDoList(newItem,this.state.user,success,error)
 	}
-	delete(event,todo){ //删除和标记yiwancheng已完成都是调用updateList()
+	delete(event,todo){ //删除和标记已完成都是调用updateList()
 		todo.deleted = true;
 		this.setState(this.state)
-		console.log('要调用save了')
-		console.log(todo)
 		console.log('要调用update了')
-		updateToDoList(this.state.user,todo.id,'deleted',true)
+		updateToDoList(this.state.user,todo.id,'deleted',todo.deleted)
 	}
 	
 }

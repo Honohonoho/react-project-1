@@ -51,24 +51,29 @@ export function signIn(username,password,successFn,errorFn){
 		errorFn.call(null,error)
 	})
 }
-export function updateToDoList(username,itemid,key,value){
-	var className = 'todoitem:' + username.id
-	var todoitem = AV.Object.createWithoutData(className,itemid)
+export function updateToDoList(user,objId,key,value){ //通过唯一标识的objId来update
+	var className = user.username
+	var todoitem = AV.Object.createWithoutData(className,objId)
 	todoitem.set(key,value)
+	todoitem.save().then( function(todo){
+		alert('LeanCloud已更新，deleted ==> true')
+	},function(error){
+
+	})
 }
 export function saveToDoList(item,user,successFn,errorFn){
 	// 声明类型
-	var TodoList = AV.Object.extend('todo' + user.id) 
+	var TodoList = AV.Object.extend(user.username) 
 	// 新建对象
 	var todoList = new TodoList()
 	// 设置todoList各项属性
-	todoList.set('name', user.name)
+	todoList.set('name', user.username)
 	todoList.set('title', item.title)
 	todoList.set('status', item.status)
 	todoList.set('deleted', item.deleted)
 	todoList.save().then( function(todo){
-		successFn.call(null,todo.id)
-		alert('保存成功')
+		successFn.call(null,todo.id) //todo.id是唯一的
+		alert('成功推送至至LeanCloud')
 	},function(error){
 		errorFn.call(null)
 		alert('error')
