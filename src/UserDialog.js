@@ -10,6 +10,7 @@ export default class UserDialog extends Component{
 		this.state = {
 			selected: 'signUp',
 			formData: {
+				email: '',
 				username: '',
 				password: ''
 			}
@@ -22,7 +23,7 @@ export default class UserDialog extends Component{
 	}
 	signUp(e){
 		e.preventDefault()
-		let {username,password} = this.state.formData
+		let {email,username,password} = this.state.formData
 		let success = (user)=>{
 			this.props.onSignUp.call(null,user)
 		}
@@ -77,8 +78,14 @@ export default class UserDialog extends Component{
 		let signUpForm = (
 			<form className="signUp" onSubmit={this.signUp.bind(this)}> {/*注册*/}
 				<div className="row">
+					<label>邮箱</label>
+					<input type="text" autoFocus="autofocus" placeholder="请输入邮箱"
+						value={this.state.formData.email}
+						onChange={this.changeFormData.bind(this,'email')} /> {/* bind 不仅可以绑定 this，还可以绑定第一个参数 */}
+				</div>
+				<div className="row">
 					<label>用户名</label>
-					<input type="text" autoFocus="autofocus" placeholder="请输入用户名"
+					<input type="text" placeholder="请输入用户名"
 						value={this.state.formData.username}
 						onChange={this.changeFormData.bind(this,'username')} /> {/* bind 不仅可以绑定 this，还可以绑定第一个参数 */}
 				</div>
@@ -109,6 +116,9 @@ export default class UserDialog extends Component{
 				</div>
 				<div className="row actions">
 					<button type="submit">登录</button>
+				</div>
+				<div className="find">
+					<a href="javasricpt:;">忘记密码？</a>
 				</div>
 			</form>	
 		)
