@@ -9,6 +9,7 @@ export default class UserDialog extends Component{
 		super(props)
 		this.state = {
 			selected: 'signUp',
+			selectedTab: 'signInOrsignUp',
 			formData: {
 				email: '',
 				username: '',
@@ -74,6 +75,14 @@ export default class UserDialog extends Component{
 		stateCopy.formData[key] = e.target.value;
 		this.setState(stateCopy)
 	}
+	showForgotPassword(){
+		let stateCopy = DeepCopy(this.state)
+		stateCopy.selectedTab = 'forgotPassword'
+		this.setState(stateCopy)
+	}
+	resetPassword(){
+
+	}
 	render(){
 		let signUpForm = (
 			<form className="signUp" onSubmit={this.signUp.bind(this)}> {/*注册*/}
@@ -118,9 +127,47 @@ export default class UserDialog extends Component{
 					<button type="submit">登录</button>
 				</div>
 				<div className="find">
-					<a href="javasricpt:;">忘记密码？</a>
+					<a href="#" onClick={this.showForgotPassword.bind(this)}>忘记密码？</a>
 				</div>
 			</form>	
+		)
+		let signInOrsignUp = (
+			<div className="signInOrsignUp" >
+				<nav onChange={this.switch.bind(this)}>
+					<label className={this.state.selected === 'signUp' ? "checked" : null}>
+						<input type="radio" value="signUp" 
+							checked={this.state.selected === 'signUp'}
+							onChange={this.switch.bind(this)} />注册
+					</label>
+					<label className={this.state.selected === 'signIn' ? "checked" : null}>
+						<input type="radio" value="signIn"
+							checked={this.state.selected === 'signIn'}
+							onChange={this.switch.bind(this)} />登录
+					</label>
+				</nav>
+				<div className="panes">
+					{this.state.selected === 'signUp' ? signUpForm : null}
+					{this.state.selected === 'signIn' ? signInForm : null}
+				</div>
+			</div>
+		)
+		let forgotPassword = (
+			<div className="forgotPassword">
+				<p>
+					重置密码
+				</p>
+				<form className="forgotPassword" onSubmit={this.resetPassword.bind(this)}>
+					<div className="row">
+						<label>邮箱</label>
+						<input type="text" autoFocus="autofocus" placeholder="请输入邮箱"
+							value={this.state.formData.email}
+							onChange={this.changeFormData.bind(this,'email')} />
+					</div>
+					<div className="row actions">
+						<button type="submit">发送重置密码邮件</button>
+					</div>
+				</form>
+			</div>
 		)
 		return (
 			<div className="UserDialog-Wrapper">
@@ -129,22 +176,7 @@ export default class UserDialog extends Component{
 						<img src={Logo} alt=""/>
 						<p>欢迎使用 ToDoList</p>
 					</div>
-					<nav onChange={this.switch.bind(this)}>
-						<label className={this.state.selected === 'signUp' ? "checked" : null}>
-							<input type="radio" value="signUp" 
-								checked={this.state.selected === 'signUp'}
-								onChange={this.switch.bind(this)} />注册
-						</label>
-						<label className={this.state.selected === 'signIn' ? "checked" : null}>
-							<input type="radio" value="signIn"
-								checked={this.state.selected === 'signIn'}
-								onChange={this.switch.bind(this)} />登录
-						</label>
-					</nav>
-					<div className="panes">
-						{this.state.selected === 'signUp' ? signUpForm : null}
-						{this.state.selected === 'signIn' ? signInForm : null}
-					</div>
+					{this.state.selectedTab === 'signInOrsignUp' ? signInOrsignUp : forgotPassword}
 				</div>
 			</div>
 		)

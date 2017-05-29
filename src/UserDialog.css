@@ -30,23 +30,23 @@
 	font-size: 3em;
 	color: #8a8a8a;
 }
-.UserDialog > nav{
+.UserDialog > .signInOrsignUp>nav{
 	width: 10em;
 	margin: 2em auto 0 auto;
 }
-.UserDialog > nav> label{
+.UserDialog > .signInOrsignUp> nav> label{
 	cursor: pointer;
 	padding: .5em 12px .5em 0;
 }
-.UserDialog > nav>.checked{
+.UserDialog > .signInOrsignUp>nav>.checked{
 	background: #8a8a8a;
     color: #333;
     border-radius: 4px;
 }
-.UserDialog > nav> label>input{
+.UserDialog > .signInOrsignUp>nav> label>input{
 	visibility: hidden;
 }
-.UserDialog > .panes{
+.UserDialog >.signInOrsignUp> .panes{
 	padding: 0 1em 1em;
 	margin-top: 2em;
 }
@@ -78,6 +78,7 @@
 	background: #333;
 	color: #8a8a8a;
 	padding: .5em 1em;
+	margin-top: 1em;
 	border: 1px solid #565656;
 	border-radius: 4px;
 	cursor: pointer;
@@ -85,4 +86,19 @@
 .UserDialog form>.actions>button:hover{
 	background: #dbdbdb;
 	color: #333;
+}
+.UserDialog >.forgotPassword> form{
+	padding-bottom: 1em;
+}
+.UserDialog >.forgotPassword>form>.row:first-child{
+	padding: 0 1em 0 0;
+}
+.UserDialog >.forgotPassword >p{
+	display: inline-block;
+	background: #8a8a8a;
+    color: #333;
+    border-radius: 4px;
+	font-size: 1em;
+	margin: 1em auto;
+	padding: .5em 1em .5em 1em;
 }
