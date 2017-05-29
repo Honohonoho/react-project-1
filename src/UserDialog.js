@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './UserDialog.css';
 import {signUp,signIn,sendPasswordResetEmail} from './leanCloud';
 import SignUpForm from './SignUpForm';
+import SignInForm from './SignInForm';
 import Logo from './img/list-todo.png';
 import {DeepCopy} from './DeepCopy';
 
@@ -93,28 +94,6 @@ export default class UserDialog extends Component{
 	}
 	render(){
 
-		let signInForm = (
-			<form className="signIn" onSubmit={this.signIn.bind(this)}> {/*登录*/}
-				<div className="row">
-					<label>用户名</label>
-					<input type="text" autoFocus="autofocus" placeholder="请输入用户名"
-						value={this.state.formData.username}
-						onChange={this.changeFormData.bind(this,'username')} />
-				</div>
-				<div className="row">
-					<label>密码</label>
-					<input type="password" placeholder="请输入密码"
-						value={this.state.formData.password}
-						onChange={this.changeFormData.bind(this,'password')} />
-				</div>
-				<div className="row actions">
-					<button type="submit">登录</button>
-				</div>
-				<div className="forgot">
-					<a href="#" onClick={this.showForgotPassword.bind(this)}>忘记密码？</a>
-				</div>
-			</form>	
-		)
 		let signInOrsignUp = (
 			<div className="signInOrsignUp" >
 				<nav onChange={this.switch.bind(this)}>
@@ -133,8 +112,14 @@ export default class UserDialog extends Component{
 					{this.state.selected === 'signUp' ? 
 						<signUpForm formData={this.state.formData}
 							onChange={this.changeFormData.bind(this)}
-							onSubmit={this.signUp.bind(this)} /> : null}
-					{this.state.selected === 'signIn' ? signInForm : null}
+							onSubmit={this.signUp.bind(this)}
+						/> : null}
+					{this.state.selected === 'signIn' ? 
+						<signInForm formData={this.state.formData}
+							onChange={this.changeFormData.bind(this)}
+							onSubmit={this.signIn.bind(this)}
+							onForgotPassword={this.showForgotPassword.bind(this)}
+						/> : null}
 				</div>
 			</div>
 		)
