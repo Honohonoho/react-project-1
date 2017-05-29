@@ -5,6 +5,7 @@ import './App.css';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import UserDialog from './UserDialog';
+import {DeepCopy} from './DeepCopy';
 import {getCurrentUser, signOut, saveToDoList, updateToDoList, loadToDoList} from './leanCloud';
 
 
@@ -65,12 +66,12 @@ class App extends Component {
 	}
 	signOut(){
 		signOut()
-		let stateCopy = JSON.parse(JSON.stringify(this.state))
+		let stateCopy = DeepCopy(this.state)
 		stateCopy.user = {}
 		this.setState(stateCopy)
 	}
     onSignUpOrSignIn(user){
-        let stateCopy = JSON.parse(JSON.stringify(this.state))
+        let stateCopy = DeepCopy(this.state)
         stateCopy.user = user
         this.setState(stateCopy)
     }

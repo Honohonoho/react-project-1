@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './UserDialog.css';
 import {signUp,signIn} from './leanCloud';
 import Logo from './img/list-todo.png';
+import {DeepCopy} from './DeepCopy';
 
 export default class UserDialog extends Component{
 	constructor(props){
@@ -68,7 +69,7 @@ export default class UserDialog extends Component{
 		signIn(username,password,success,error)
 	}
 	changeFormData(key,e){
-		let stateCopy = JSON.parse(JSON.stringify(this.state))
+		let stateCopy = DeepCopy(this.state)
 		stateCopy.formData[key] = e.target.value;
 		this.setState(stateCopy)
 	}
