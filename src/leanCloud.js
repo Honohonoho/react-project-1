@@ -51,12 +51,24 @@ export function signIn(username,password,successFn,errorFn){
 		errorFn.call(null,error)
 	})
 }
+export function sendPasswordResetEmail(emailAddress,successFn,errorFn){
+	AV.User.requestPasswordReset(emailAddress).then(function(success){
+		successFn.call()
+	},function(error){
+		console.dir() //console.dir()可以显示一个对象所有的属性和方法。
+
+	})
+}
 export function updateToDoList(user,objId,key,value){ //通过唯一标识的objId来update
 	var className = user.username
 	var todoitem = AV.Object.createWithoutData(className,objId)
 	todoitem.set(key,value)
 	todoitem.save().then( function(todo){
-		alert('LeanCloud已更新，deleted ==> true')
+		if(key === 'status' && value === 'completed'){
+			alert('LeanCloud已更新，status ==> completed')
+		}else if(key === 'deleted'){
+			alert('LeanCloud已更新，deleted ==> true')
+		}
 	},function(error){
 
 	})

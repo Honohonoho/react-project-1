@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './UserDialog.css';
-import {signUp,signIn} from './leanCloud';
+import {signUp,signIn,sendPasswordResetEmail} from './leanCloud';
+import SignUpForm from './SignUpForm';
 import Logo from './img/list-todo.png';
 import {DeepCopy} from './DeepCopy';
 
@@ -44,7 +45,7 @@ export default class UserDialog extends Component{
 					break
 			}
 		}
-		signUp(username,password,success,error)
+		signUp(email,username,password,success,error)
 	}
 	signIn(e){
 		e.preventDefault()
@@ -80,35 +81,18 @@ export default class UserDialog extends Component{
 		stateCopy.selectedTab = 'forgotPassword'
 		this.setState(stateCopy)
 	}
-	resetPassword(){
-
+	resetPassword(e){
+		e.preventDefault()
+		sendPasswordResetEmail(this.state.formData.email)
+	}
+	returnToSignIn(){
+		let stateCopy = DeepCopy(this.state)
+		stateCopy.selectedTab = 'signInOrsignUp'
+		stateCopy.selected = 'signIn'
+		this.setState(stateCopy)
 	}
 	render(){
-		let signUpForm = (
-			<form className="signUp" onSubmit={this.signUp.bind(this)}> {/*注册*/}
-				<div className="row">
-					<label>邮箱</label>
-					<input type="text" autoFocus="autofocus" placeholder="请输入邮箱"
-						value={this.state.formData.email}
-						onChange={this.changeFormData.bind(this,'email')} /> {/* bind 不仅可以绑定 this，还可以绑定第一个参数 */}
-				</div>
-				<div className="row">
-					<label>用户名</label>
-					<input type="text" placeholder="请输入用户名"
-						value={this.state.formData.username}
-						onChange={this.changeFormData.bind(this,'username')} /> {/* bind 不仅可以绑定 this，还可以绑定第一个参数 */}
-				</div>
-				<div className="row">
-					<label>密码</label>
-					<input type="password" placeholder="请输入密码"
-						value={this.state.formData.password}
-						onChange={this.changeFormData.bind(this,'password')} />
-				</div>
-				<div className="row actions">
-					<button type="submit">注册</button>
-				</div>
-			</form>		
-		)
+
 		let signInForm = (
 			<form className="signIn" onSubmit={this.signIn.bind(this)}> {/*登录*/}
 				<div className="row">
@@ -126,7 +110,7 @@ export default class UserDialog extends Component{
 				<div className="row actions">
 					<button type="submit">登录</button>
 				</div>
-				<div className="find">
+				<div className="forgot">
 					<a href="#" onClick={this.showForgotPassword.bind(this)}>忘记密码？</a>
 				</div>
 			</form>	
@@ -146,7 +130,10 @@ export default class UserDialog extends Component{
 					</label>
 				</nav>
 				<div className="panes">
-					{this.state.selected === 'signUp' ? signUpForm : null}
+					{this.state.selected === 'signUp' ? 
+						<signUpForm formData={this.state.formData}
+							onChange={this.changeFormData.bind(this)}
+							onSubmit={this.signUp.bind(this)} /> : null}
 					{this.state.selected === 'signIn' ? signInForm : null}
 				</div>
 			</div>
@@ -164,7 +151,11 @@ export default class UserDialog extends Component{
 							onChange={this.changeFormData.bind(this,'email')} />
 					</div>
 					<div className="row actions">
+						
 						<button type="submit">发送重置密码邮件</button>
+					</div>
+					<div className="return">
+						<a herf="#" onClick={this.returnToSignIn.bind(this)}>←返回登录</a>
 					</div>
 				</form>
 			</div>

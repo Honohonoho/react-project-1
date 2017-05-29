@@ -54,6 +54,11 @@ class App extends Component {
 		)
 	}
 	componentWillMount(){
+		if(this.state.user){
+			this.resetToDoList.call(this)
+		}
+	}
+	resetToDoList(){
 		function success(list){
 			this.state.todoList = list
 			this.setState({
@@ -68,12 +73,14 @@ class App extends Component {
 		signOut()
 		let stateCopy = DeepCopy(this.state)
 		stateCopy.user = {}
+		stateCopy.todoList = []
 		this.setState(stateCopy)
 	}
     onSignUpOrSignIn(user){
         let stateCopy = DeepCopy(this.state)
         stateCopy.user = user
         this.setState(stateCopy)
+		this.resetToDoList.call(this)
     }
 	componentDidUpdate(){
 
@@ -81,7 +88,6 @@ class App extends Component {
 	toggle(e,todo){
 		todo.status = todo.status === 'completed' ? '' : 'completed'
 		this.setState(this.state)
-		console.log('调用toggle：')
 		updateToDoList(this.state.user,todo.id,'status',todo.status)
 	}
 	changeTitle(event){
@@ -94,7 +100,7 @@ class App extends Component {
 		var newItem = {
 			id: '',
 			title: event.target.value,
-			status: null,
+			status: '',
 			deleted: false
 		}
 		let success = (objId)=>{
