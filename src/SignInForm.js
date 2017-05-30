@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function(props){
 	return(
 		<form className="signIn" onSubmit={props.onSubmit.bind(this)}> {/*登录*/}
