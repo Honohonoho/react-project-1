@@ -1,4 +1,5 @@
 .App {
+  position: relative;
   text-align: center;
   color: #333;
   border: 1px solid #aaa;
@@ -15,26 +16,29 @@
 }
 .App>h1{
   color: #333;
-  font-size: 2em;
-  display: inline-block;
-  padding: 0 3em 0 4em;
 }
 .App>.todoList>li{
-  background-color: #fff;
   border: 1px solid #eee;
+  border-radius: 5px;
   box-shadow: 0 0 .75em #333;
   margin-bottom: 1em;
 }
 .App>.todoList>li>.ToDoItem>.title{
   color: #333;
 }
-.App>.todoList>li>.ToDoItem>button{
-  border: 1px solid #333;
-  border-radius: 50%;
-}
-/*.App>.todoList>li:nth-child(odd){
+.App>button{
+  position: absolute;
+  right: .5em;
+  top: 24px;
   background: #eee;
-}*/
-/*.App>.todoList>li:nth-child(even){
-  background: transparent;
-}*/
+  color: #333;
+  padding: .5em 1em;
+  border: 1px solid #333;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.App>button:hover{
+  background: #333;
+  color: #eee;
+}
+

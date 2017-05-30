@@ -1,5 +1,6 @@
 import React,{ Component } from 'react';
 import './TodoItem.css';
+import Deleted from './img/deleted.png'
 
 export default class TodoItem extends Component {
 	render(){
@@ -8,7 +9,7 @@ export default class TodoItem extends Component {
 				<input type="checkbox" checked={this.props.todo.status === 'completed'}
 					onChange={this.toggle.bind(this)} />
 				<span className="title">{this.props.todo.title}</span>
-				<button onClick={this.delete.bind(this)}>删除</button>
+				<img onClick={this.delete.bind(this)} src={Deleted} alt=""/>
 			</div>
 		)
 	}
