@@ -43,6 +43,10 @@ export const Todomodel = {
 			errorFn && errorFn.call(null)
 			alert('error')
 		})
+		let acl = new AV.ACL()
+		acl.setPublicReadAccess(false)
+		acl.setWriteAccess(av.User.current(),true)
+		todo.setACL(acl);
 	},
 	update(){
 
