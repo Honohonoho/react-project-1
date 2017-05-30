@@ -8,6 +8,32 @@ AV.init({
 });
 
 export default AV
+export const Todomodel = {
+	create(item, user, successFn, errorFn){
+		// 声明类型
+		var Todo = AV.Object.extend(user.username) 
+		// 新建对象
+		var todo = new Todo()
+		// 设置todoList各项属性
+		todo.set('name', user.username)
+		todo.set('title', item.title)
+		todo.set('status', item.status)
+		todo.set('deleted', item.deleted)
+		todo.save().then( function(todo){
+			successFn.call(null,todo.id) //todo.id是唯一的
+			alert('成功推送至至LeanCloud')
+		},function(error){
+			errorFn && errorFn.call(null)
+			alert('error')
+		})
+	},
+	update(){
+
+	},
+	destroy(){
+
+	}
+}
 export function signUp(email,username,password,successFn,errorFn){
 	//新建 AVuser 对象实例
 	var user = new AV.User()
@@ -73,24 +99,24 @@ export function updateToDoList(user,objId,key,value){ //通过唯一标识的obj
 
 	})
 }
-export function saveToDoList(item,user,successFn,errorFn){
-	// 声明类型
-	var TodoList = AV.Object.extend(user.username) 
-	// 新建对象
-	var todoList = new TodoList()
-	// 设置todoList各项属性
-	todoList.set('name', user.username)
-	todoList.set('title', item.title)
-	todoList.set('status', item.status)
-	todoList.set('deleted', item.deleted)
-	todoList.save().then( function(todo){
-		successFn.call(null,todo.id) //todo.id是唯一的
-		alert('成功推送至至LeanCloud')
-	},function(error){
-		errorFn.call(null)
-		alert('error')
-	})
-}
+// export function saveToDoList(item,user,successFn,errorFn){
+// 	// 声明类型
+// 	var TodoList = AV.Object.extend(user.username) 
+// 	// 新建对象
+// 	var todoList = new TodoList()
+// 	// 设置todoList各项属性
+// 	todoList.set('name', user.username)
+// 	todoList.set('title', item.title)
+// 	todoList.set('status', item.status)
+// 	todoList.set('deleted', item.deleted)
+// 	todoList.save().then( function(todo){
+// 		successFn.call(null,todo.id) //todo.id是唯一的
+// 		alert('成功推送至至LeanCloud')
+// 	},function(error){
+// 		errorFn && errorFn.call(null)
+// 		alert('error')
+// 	})
+// }
 export function loadToDoList(user,successFn,errorFn){
 	var list = []
 	AV.Query.doCloudQuery(`select * from ${user.username}`)

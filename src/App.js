@@ -6,7 +6,7 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import UserDialog from './UserDialog';
 import {DeepCopy} from './DeepCopy';
-import {getCurrentUser, signOut, saveToDoList, updateToDoList, loadToDoList} from './leanCloud';
+import {getCurrentUser, signOut, Todomodel, updateToDoList, loadToDoList} from './leanCloud';
 
 
 class App extends Component {
@@ -97,8 +97,7 @@ class App extends Component {
 		})
 	}
 	addTodo(event){ //添加调用saveList()
-		var newItem = {
-			id: '',
+		let newItem = {
 			title: event.target.value,
 			status: '',
 			deleted: false
@@ -112,9 +111,10 @@ class App extends Component {
 			})
 			console.log('已添加')
 		}
-		function error(){
+		let error = (error)=>{
+			console.log(error)
 		}
-		saveToDoList(newItem,this.state.user,success,error)
+		Todomodel.create(newItem,this.state.user,success,error)
 	}
 	delete(event,todo){ //删除和标记已完成都是调用updateList()
 		todo.deleted = true;
