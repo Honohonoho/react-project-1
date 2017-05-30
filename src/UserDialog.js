@@ -10,7 +10,7 @@ export default class UserDialog extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			selectedTab: 'signInOrsignUp',
+			selectedTab: 'signInOrSignUp',
 			formData: {
 				email: '',
 				username: '',
@@ -83,7 +83,7 @@ export default class UserDialog extends Component{
 	}
 	returnToSignIn(){
 		let stateCopy = DeepCopy(this.state)
-		stateCopy.selectedTab = 'signInOrsignUp'
+		stateCopy.selectedTab = 'signInOrSignUp'
 		stateCopy.selected = 'signIn'
 		this.setState(stateCopy)
 	}
@@ -96,7 +96,7 @@ export default class UserDialog extends Component{
 						<p>欢迎使用 ToDoList</p>
 					</div>
 					{
-						this.state.selectedTab === 'signInOrsignUp' ?
+						this.state.selectedTab === 'signInOrSignUp' ?
 							<SignInOrSignUp
 								formData={this.state.formData}
 								onChange={this.changeFormData.bind(this)}

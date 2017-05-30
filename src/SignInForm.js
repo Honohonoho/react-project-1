@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function(props){
 	return(
-		<form className="signIn" onSubmit={props.onSubmit.bind(this)}> {/*登录*/}
+		<form className="signIn" onSubmit={props.onSubmit}> {/*登录*/}
 			<div className="row">
 				<label>用户名</label>
 				<input type="text" autoFocus="autofocus" placeholder="请输入用户名"

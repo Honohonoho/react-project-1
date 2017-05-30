@@ -19,7 +19,7 @@ export default class ForgotPasswordForm extends Component{
 						<button type="submit">发送重置密码邮件</button>
 					</div>
 					<div className="return">
-						<a herf="#" onClick={this.props.onSignIn}>←返回登录</a>
+						<a href="#" onClick={this.props.onSignIn}>←返回登录</a>
 					</div>
 				</form>
 			</div>

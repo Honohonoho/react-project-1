@@ -1,4 +1,4 @@
-import React,{ Component } from 'react';
+import React from 'react';
 import './TodoInput.css'
 
 function submit(props,e){
