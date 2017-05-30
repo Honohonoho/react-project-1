@@ -6,7 +6,7 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import UserDialog from './UserDialog';
 import {DeepCopy} from './DeepCopy';
-import {getCurrentUser, signOut, Todomodel, updateToDoList, loadToDoList} from './leanCloud';
+import {getCurrentUser, signOut, Todomodel, updateToDoList} from './leanCloud';
 
 
 class App extends Component {
@@ -16,6 +16,20 @@ class App extends Component {
 			user: getCurrentUser() || {},
 			newTodo: '',
 			todoList: []
+		}
+
+		let user = getCurrentUser()
+		if(user){
+			Todomodel.loadToDoList(user, success, error)
+			let success = (list)=>{
+				let stateCopy = DeepCopy(this.state)
+				stateCopy.todoList = list
+				this.setState(stateCopy)
+			}
+			let error = (error)=>{
+				console.log(error)
+			}
+			Todomodel.loadToDoList(user, success, error)
 		}
 	}
 	
@@ -53,22 +67,22 @@ class App extends Component {
 			</div>
 		)
 	}
-	componentWillMount(){
-		if(this.state.user){
-			this.resetToDoList.call(this)
-		}
-	}
-	resetToDoList(){
-		function success(list){
-			this.state.todoList = list
-			this.setState({
-				todoList: this.state.todoList
-			})
-		}
-		function error(){
-		}
-		loadToDoList(this.state.user,success.bind(this),error) //success.bind(this)和addToDo中success箭头函数实现的效果一样。。。
-	}
+	// componentWillMount(){
+	// 	if(this.state.user){
+	// 		this.resetToDoList.call(this)
+	// 	}
+	// }
+	// resetToDoList(){
+	// 	function success(list){
+	// 		this.state.todoList = list
+	// 		this.setState({
+	// 			todoList: this.state.todoList
+	// 		})
+	// 	}
+	// 	function error(){
+	// 	}
+	// 	loadToDoList(this.state.user,success.bind(this),error) //success.bind(this)和addToDo中success箭头函数实现的效果一样。。。
+	// }
 	signOut(){
 		signOut()
 		let stateCopy = DeepCopy(this.state)

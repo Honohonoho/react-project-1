@@ -9,6 +9,23 @@ AV.init({
 
 export default AV
 export const Todomodel = {
+	loadToDoList(user, successFn, errorFn){
+		let arry = []
+		AV.Query.doCloudQuery(`select * from ${user.username}`)
+		.then( function(data){ // results 即为查询结果，它是一个 AV.Object 数组
+			for(let i=0; i<data.results.length; i++){
+				let obj = {
+					id: data.results[i].id,
+					...data.results[i].attributes
+				}
+				arry.push(obj)
+			}
+			successFn.call(null,list)
+		},function(error){
+			console.log(error)
+			errorFn && errorFn.call(null)
+		})
+	},
 	create(item, user, successFn, errorFn){
 		// 声明类型
 		var Todo = AV.Object.extend(user.username) 
@@ -117,20 +134,20 @@ export function updateToDoList(user,objId,key,value){ //通过唯一标识的obj
 // 		alert('error')
 // 	})
 // }
-export function loadToDoList(user,successFn,errorFn){
-	var list = []
-	AV.Query.doCloudQuery(`select * from ${user.username}`)
-	.then( function(data){ // results 即为查询结果，它是一个 AV.Object 数组
-		for(let i=0; i<data.results.length; i++){
-			let obj = {
-				id: data.results[i].id,
-				...data.results[i].attributes
-			}
-			list.push(obj)
-		}
-		successFn.call(null,list)
-	},function(error){
-		console.log(error)
-		errorFn.call(null)
-	})
-}
+// export function loadToDoList(user,successFn,errorFn){
+// 	let arry = []
+// 	AV.Query.doCloudQuery(`select * from ${user.username}`)
+// 	.then( function(data){ // results 即为查询结果，它是一个 AV.Object 数组
+// 		for(let i=0; i<data.results.length; i++){
+// 			let obj = {
+// 				id: data.results[i].id,
+// 				...data.results[i].attributes
+// 			}
+// 			arry.push(obj)
+// 		}
+// 		successFn.call(null,list)
+// 	},function(error){
+// 		console.log(error)
+// 		errorFn && errorFn.call(null)
+// 	})
+// }
