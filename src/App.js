@@ -6,7 +6,7 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import UserDialog from './UserDialog';
 import {DeepCopy} from './DeepCopy';
-import {getCurrentUser, signOut, Todomodel, updateToDoList} from './leanCloud';
+import {getCurrentUser, signOut, Todomodel} from './leanCloud';
 
 
 class App extends Component {
@@ -20,7 +20,6 @@ class App extends Component {
 
 		let user = getCurrentUser()
 		if(user){
-			Todomodel.loadToDoList(user, success, error)
 			let success = (list)=>{
 				let stateCopy = DeepCopy(this.state)
 				stateCopy.todoList = list
@@ -67,22 +66,6 @@ class App extends Component {
 			</div>
 		)
 	}
-	// componentWillMount(){
-	// 	if(this.state.user){
-	// 		this.resetToDoList.call(this)
-	// 	}
-	// }
-	// resetToDoList(){
-	// 	function success(list){
-	// 		this.state.todoList = list
-	// 		this.setState({
-	// 			todoList: this.state.todoList
-	// 		})
-	// 	}
-	// 	function error(){
-	// 	}
-	// 	loadToDoList(this.state.user,success.bind(this),error) //success.bind(this)和addToDo中success箭头函数实现的效果一样。。。
-	// }
 	signOut(){
 		signOut()
 		let stateCopy = DeepCopy(this.state)
@@ -100,9 +83,14 @@ class App extends Component {
 
 	}
 	toggle(e,todo){
+		let oldstatus = todo.status
 		todo.status = todo.status === 'completed' ? '' : 'completed'
-		this.setState(this.state)
-		updateToDoList(this.state.user,todo.id,'status',todo.status)
+		Todomodel.update(this.state.user, todo, ()=>{  //尝试新写法，第一个箭头函数为success，第二个为error
+			this.setState(this.state)
+		},(error)=>{
+			todo.status = oldstatus
+			this.setState(this.state)
+		})
 	}
 	changeTitle(event){
 		this.setState({
@@ -110,15 +98,16 @@ class App extends Component {
 			todoList: this.state.todoList
 		})
 	}
-	addTodo(event){ //添加调用saveList()
+	addTodo(event){
 		let newItem = {
+			id: '',
 			title: event.target.value,
 			status: '',
 			deleted: false
 		}
 		let success = (objId)=>{
 			newItem.id = objId
-			this.state.todoList.push(newItem) //先保存至leanCloud，后添加至todoList
+			this.state.todoList.push(newItem)
 			this.setState({
 				newTodo: '',
 				todoList: this.state.todoList
@@ -128,17 +117,17 @@ class App extends Component {
 		let error = (error)=>{
 			console.log(error)
 		}
-		Todomodel.create(newItem,this.state.user,success,error)
+		Todomodel.create(newItem,this.state.user,success,error) //函数调用写在函数表达式之后
 	}
-	delete(event,todo){ //删除和标记已完成都是调用updateList()
+	delete(event,todo){ //删除和标记已完成都是调用update()
 		let success = ()=>{
 			todo.deleted = true;
 			this.setState(this.state)
 		}
 		let error = ()=>{
-			
+
 		}
-		Todomodel.destroy(user, todo.id, success, error) //this.state.user
+		Todomodel.destroy(this.state.user, todo.id, success, error)
 	}
 	
 }

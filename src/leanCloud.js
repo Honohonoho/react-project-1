@@ -20,7 +20,7 @@ export const Todomodel = {
 				}
 				arry.push(obj)
 			}
-			successFn.call(null,list)
+			successFn.call(null,arry)
 		},function(error){
 			console.log(error)
 			errorFn && errorFn.call(null)
@@ -45,10 +45,21 @@ export const Todomodel = {
 		})
 		let acl = new AV.ACL()
 		acl.setPublicReadAccess(false)
-		acl.setWriteAccess(av.User.current(),true)
+		acl.setWriteAccess(AV.User.current(),true)
+		acl.setReadAccess(AV.User.current(),true)
 		todo.setACL(acl);
 	},
-	update(){
+	update(user, item, successFn, errorFn){
+		let className = user.username
+		let todo = AV.Object.createWithoutData(className,item.id)
+		item.title !== undefined && todo.set('title',item.title)
+		item.status !== '' && todo.set('status',item.status)
+		item.deleted !== undefined && todo.set('deleted',item.deleted)
+		todo.save().then((res)=>{ //尝试新写法
+			successFn && successFn.cal(null)
+		},(error)=>{
+			errorFn && errorFn.cal(null,error)
+		})
 
 	},
 	destroy(user, objId, successFn, errorFn){
