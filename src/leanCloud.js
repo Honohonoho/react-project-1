@@ -10,22 +10,32 @@ AV.init({
 export default AV
 export const Todomodel = {
 	loadToDoList(user, successFn, errorFn){
-		let arry = []
-		AV.Query.doCloudQuery(`select * from ${user.username}`)
-		.then( function(data){ // results 即为查询结果，它是一个 AV.Object 数组
-			for(let i=0; i<data.results.length; i++){
-				let obj = {
-					id: data.results[i].id,
-					...data.results[i].attributes
-				}
-				arry.push(obj)
-			}
+		let query = new AV.Query(user.username)
+		query.equalTo('deleted',false);
+		query.find().then((response)=>{
+			let arry = response.map((key)=>{
+				return {id: key.id, ...key.attributes}
+			})
 			successFn.call(null,arry)
-		},function(error){
-			console.log(error)
-			errorFn && errorFn.call(null)
+		},(error)=>{
+			errorFn && errorFn.call(null, error)
 		})
 	},
+	// 	AV.Query.doCloudQuery(`select * from ${user.username}`)
+	// 	.then( function(data){ // results 即为查询结果，它是一个 AV.Object 数组
+	// 		for(let i=0; i<data.results.length; i++){
+	// 			let obj = {
+	// 				id: data.results[i].id,
+	// 				...data.results[i].attributes
+	// 			}
+	// 			arry.push(obj)
+	// 		}
+	// 		successFn.call(null,arry)
+	// 	},function(error){
+	// 		console.log(error)
+	// 		errorFn && errorFn.call(null)
+	// 	})
+	// },
 	create(item, user, successFn, errorFn){
 		// 声明类型
 		var Todo = AV.Object.extend(user.username) 
@@ -37,7 +47,7 @@ export const Todomodel = {
 		todo.set('status', item.status)
 		todo.set('deleted', item.deleted)
 		todo.save().then( function(todo){
-			successFn.call(null,todo.id) //todo.id是唯一的
+			successFn.call(null,todo.id) 
 			alert('成功推送至至LeanCloud')
 		},function(error){
 			errorFn && errorFn.call(null)
@@ -53,23 +63,17 @@ export const Todomodel = {
 		let className = user.username
 		let todo = AV.Object.createWithoutData(className,item.id)
 		item.title !== undefined && todo.set('title',item.title)
-		item.status !== '' && todo.set('status',item.status)
+		item.status !== undefined && todo.set('status',item.status)
 		item.deleted !== undefined && todo.set('deleted',item.deleted)
-		todo.save().then((res)=>{ //尝试新写法
-			successFn && successFn.cal(null)
+		todo.save().then((response)=>{
+			successFn && successFn.call(null)
 		},(error)=>{
-			errorFn && errorFn.cal(null,error)
+			errorFn && errorFn.call(null,error)
 		})
 
 	},
-	destroy(user, objId, successFn, errorFn){
-		let className = user.name
-		let todo = AV.Object.createWithoutData(className,objId)
-		todo.destroy().then(function(res){
-			successFn && successFn.call(null)
-		},function(error){
-			errorFn && errorFn.call(null,error)
-		});
+	destroy(user, item, successFn, errorFn){ //不应该直接删除，而是将数据标记为 deleted：true
+		Todomodel.update(user, {id: item.id,deleted: true} , successFn, errorFn)
 	}
 }
 export function signUp(email,username,password,successFn,errorFn){
@@ -120,55 +124,5 @@ export function sendPasswordResetEmail(emailAddress,successFn,errorFn){
 		successFn.call()
 	},function(error){
 		console.dir() //console.dir()可以显示一个对象所有的属性和方法。
-
 	})
 }
-export function updateToDoList(user,objId,key,value){ //通过唯一标识的objId来update
-	var className = user.username
-	var todoitem = AV.Object.createWithoutData(className,objId)
-	todoitem.set(key,value)
-	todoitem.save().then( function(todo){
-		if(key === 'status' && value === 'completed'){
-			alert('LeanCloud已更新，status ==> completed')
-		}else if(key === 'deleted'){
-			alert('LeanCloud已更新，deleted ==> true')
-		}
-	},function(error){
-
-	})
-}
-// export function saveToDoList(item,user,successFn,errorFn){
-// 	// 声明类型
-// 	var TodoList = AV.Object.extend(user.username) 
-// 	// 新建对象
-// 	var todoList = new TodoList()
-// 	// 设置todoList各项属性
-// 	todoList.set('name', user.username)
-// 	todoList.set('title', item.title)
-// 	todoList.set('status', item.status)
-// 	todoList.set('deleted', item.deleted)
-// 	todoList.save().then( function(todo){
-// 		successFn.call(null,todo.id) //todo.id是唯一的
-// 		alert('成功推送至至LeanCloud')
-// 	},function(error){
-// 		errorFn && errorFn.call(null)
-// 		alert('error')
-// 	})
-// }
-// export function loadToDoList(user,successFn,errorFn){
-// 	let arry = []
-// 	AV.Query.doCloudQuery(`select * from ${user.username}`)
-// 	.then( function(data){ // results 即为查询结果，它是一个 AV.Object 数组
-// 		for(let i=0; i<data.results.length; i++){
-// 			let obj = {
-// 				id: data.results[i].id,
-// 				...data.results[i].attributes
-// 			}
-// 			arry.push(obj)
-// 		}
-// 		successFn.call(null,list)
-// 	},function(error){
-// 		console.log(error)
-// 		errorFn && errorFn.call(null)
-// 	})
-// }

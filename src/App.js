@@ -45,8 +45,7 @@ class App extends Component {
 		})
 		return (
 			<div className="App">
-				<h1>{this.state.user.username || '我'}的待办事项
-					
+				<h1>{this.state.user.username || '我'}的待办事项		
 				</h1>
 				{this.state.user.id ? <button onClick={this.signOut.bind(this)}>注销</button> : null}
 				<div className="inputWrapper">
@@ -100,7 +99,6 @@ class App extends Component {
 	}
 	addTodo(event){
 		let newItem = {
-			id: '',
 			title: event.target.value,
 			status: '',
 			deleted: false
@@ -119,17 +117,12 @@ class App extends Component {
 		}
 		Todomodel.create(newItem,this.state.user,success,error) //函数调用写在函数表达式之后
 	}
-	delete(event,todo){ //删除和标记已完成都是调用update()
-		let success = ()=>{
+	delete(event,todo){ //不应该直接删除，而是将数据标记为 deleted：true
+		Todomodel.destroy(this.state.user, todo, ()=>{
 			todo.deleted = true;
 			this.setState(this.state)
-		}
-		let error = ()=>{
-
-		}
-		Todomodel.destroy(this.state.user, todo.id, success, error)
-	}
-	
+		})
+	}	
 }
 
 export default App;
