@@ -131,9 +131,14 @@ class App extends Component {
 		Todomodel.create(newItem,this.state.user,success,error)
 	}
 	delete(event,todo){ //删除和标记已完成都是调用updateList()
-		todo.deleted = true;
-		this.setState(this.state)
-		updateToDoList(this.state.user,todo.id,'deleted',todo.deleted)
+		let success = ()=>{
+			todo.deleted = true;
+			this.setState(this.state)
+		}
+		let error = ()=>{
+			
+		}
+		Todomodel.destroy(user, todo.id, success, error) //this.state.user
 	}
 	
 }

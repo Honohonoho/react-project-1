@@ -51,8 +51,14 @@ export const Todomodel = {
 	update(){
 
 	},
-	destroy(){
-
+	destroy(user, objId, successFn, errorFn){
+		let className = user.name
+		let todo = AV.Object.createWithoutData(className,objId)
+		todo.destroy().then(function(res){
+			successFn && successFn.call(null)
+		},function(error){
+			errorFn && errorFn.call(null,error)
+		});
 	}
 }
 export function signUp(email,username,password,successFn,errorFn){
