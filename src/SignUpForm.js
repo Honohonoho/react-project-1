@@ -11,13 +11,13 @@ export default function (props){
 			</div>
 			<div className="row">
 				<label>用户名</label>
-				<input type="text" placeholder="请输入用户名"
+				<input type="text" placeholder="请输入用户名，长度3-10"
 					value={props.formData.username}
 					onChange={props.onChange.bind(null,'username')} /> {/* bind 不仅可以绑定 this，还可以绑定第一个参数 */}
 			</div>
 			<div className="row">
 				<label>密码</label>
-				<input type="password" placeholder="请输入密码"
+				<input type="password" placeholder="请输入密码，长度6-20"
 					value={props.formData.password}
 					onChange={props.onChange.bind(null,'password')} />
 			</div>

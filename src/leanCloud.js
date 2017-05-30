@@ -21,21 +21,6 @@ export const Todomodel = {
 			errorFn && errorFn.call(null, error)
 		})
 	},
-	// 	AV.Query.doCloudQuery(`select * from ${user.username}`)
-	// 	.then( function(data){ // results 即为查询结果，它是一个 AV.Object 数组
-	// 		for(let i=0; i<data.results.length; i++){
-	// 			let obj = {
-	// 				id: data.results[i].id,
-	// 				...data.results[i].attributes
-	// 			}
-	// 			arry.push(obj)
-	// 		}
-	// 		successFn.call(null,arry)
-	// 	},function(error){
-	// 		console.log(error)
-	// 		errorFn && errorFn.call(null)
-	// 	})
-	// },
 	create(item, user, successFn, errorFn){
 		// 声明类型
 		var Todo = AV.Object.extend(user.username) 

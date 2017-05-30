@@ -22,6 +22,10 @@ export default class UserDialog extends Component{
 	signUp(e){
 		e.preventDefault()
 		let {email,username,password} = this.state.formData
+		let isLeagal = this.checkFormData.call(this, email, username, password) //先验证，再向服务器提交
+		if (isLeagal === false){
+			return
+		}
 		let success = (user)=>{
 			this.props.onSignUp.call(null,user)
 		}
@@ -35,6 +39,9 @@ export default class UserDialog extends Component{
 					break
 				case 217:
 					alert('用户名不能含有空格')
+					break
+				case 125:
+					alert('电子邮箱地址请至少包含@')
 					break
 				default:
 					alert(error)
@@ -66,6 +73,22 @@ export default class UserDialog extends Component{
 			}
 		}
 		signIn(username,password,success,error)
+	}
+	checkFormData(email,username,password){
+		let regEmail = new RegExp("^\\w+@[\\w-]+\\.(com)$")
+		let regUsername = new RegExp("\\w{3,10}")
+		let regPassword = new RegExp("\\w{6,20}")
+		if(!regEmail.test(email)){
+			alert('邮箱地址至少包含@和.com')
+			return false
+		}else if(!regUsername.test(username)){
+			alert('用户名长度为3-10个字符')
+			return false
+		}else if(!regPassword.test(password)){
+			alert('密码长度为6-20个字符')
+			return false
+		}
+		return true
 	}
 	changeFormData(key,e){
 		let stateCopy = DeepCopy(this.state)

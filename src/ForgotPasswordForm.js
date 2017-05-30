@@ -10,7 +10,7 @@ export default class ForgotPasswordForm extends Component{
 				<form className="forgotPassword" onSubmit={this.props.onSubmit}>
 					<div className="row">
 						<label>邮箱</label>
-						<input type="text" autoFocus="autofocus" placeholder="请输入邮箱"
+						<input type="email" autoFocus="autofocus" placeholder="请输入邮箱"
 							value={this.props.formData.email}
 							onChange={this.props.onChange.bind(this,'email')} />
 					</div>
