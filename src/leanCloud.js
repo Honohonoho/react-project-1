@@ -33,7 +33,6 @@ export const Todomodel = {
 		todo.set('deleted', item.deleted)
 		todo.save().then( function(todo){
 			successFn.call(null,todo.id) 
-			alert('成功推送至至LeanCloud')
 		},function(error){
 			errorFn && errorFn.call(null)
 			alert('error')

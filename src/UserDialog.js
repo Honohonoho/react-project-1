@@ -75,11 +75,11 @@ export default class UserDialog extends Component{
 		signIn(username,password,success,error)
 	}
 	checkFormData(email,username,password){
-		let regEmail = new RegExp("^\\w+@[\\w-]+\\.(com)$")
+		let regEmail = new RegExp("^\\w+@[\\w-]+\\.+[\\w]")
 		let regUsername = new RegExp("\\w{3,10}")
 		let regPassword = new RegExp("\\w{6,20}")
 		if(!regEmail.test(email)){
-			alert('邮箱地址至少包含@和.com')
+			alert('邮箱地址至少包含@')
 			return false
 		}else if(!regUsername.test(username)){
 			alert('用户名长度为3-10个字符')
