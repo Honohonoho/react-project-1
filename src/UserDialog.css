@@ -9,39 +9,55 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: #333;
+	background: #EDF2FC;
+	color: #34373d;
 	font-family: "Microsoft YaHei";
 }
 .UserDialog{ 
-	border-radius: 4px;
-	min-width: 50em;
-	background: #333;
-	color: #8a8a8a;
+	border-radius: 10px;
+	width: 50em;
+	background: rgba(255, 255, 255, 0.3);
 	box-shadow: 0 0 1em hsla(0,0%,0%,0.35);
+	display: flex;
+	justify-content: space-around;
 }
-.UserDialog .Logo{
-	border-bottom: 1px solid #565656;
-	padding-bottom: 2em;
+.UserDialog >.Info{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 20em;
 }
-.UserDialog .Logo>img{
-	margin-left: 3em;
+.UserDialog >.Info >.Logo{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: -10px;
 }
-.UserDialog .Logo>p{
+.UserDialog >.Info >.Logo>p{
 	font-size: 3em;
-	color: #8a8a8a;
 }
-.UserDialog > .signInOrSignUp>nav{
+.UserDialog >.Info >.text {
+	font-size: 1em;
+	line-height: 2em;
+}
+.UserDialog > .signInOrSignUp {
+	width: 20em;
+	height: 19em;
+}
+.UserDialog > .signInOrSignUp >nav{
 	width: 10em;
 	margin: 2em auto 0 auto;
 }
-.UserDialog > .signInOrSignUp> nav> label{
+.UserDialog > .signInOrSignUp> nav > label{
 	cursor: pointer;
 	padding: .5em 12px .5em 0;
 }
+.UserDialog > .signInOrSignUp> nav > label:hover{
+	color: #4663F3;
+}
 .UserDialog > .signInOrSignUp>nav>.checked{
-	background: #8a8a8a;
-    color: #333;
-    border-radius: 4px;
+	border-bottom: 2px solid #4663F3;
+	color: #4663F3;
 }
 .UserDialog > .signInOrSignUp>nav> label>input{
 	visibility: hidden;
@@ -58,9 +74,9 @@
 	width: 100%;
 	height: 2em;
 	padding-left: .75em;
-	background: #565656;
 	border: none;
 	outline: none;
+	padding: 1em .8em;
 }
 .UserDialog form>.row>input:focus{
 	background: #fff;
@@ -72,20 +88,22 @@
 }
 .UserDialog form>.row.actions{
 	display: inline-block;
-	color: #8a8a8a;
 }
 .UserDialog form>.actions>button{
-	background: #333;
-	color: #8a8a8a;
+	color: #4663F3;
+	background: #fff;
 	padding: .5em 1em;
 	margin-top: 1em;
-	border: 1px solid #565656;
+	border: 1px solid #4663F3;
 	border-radius: 4px;
 	cursor: pointer;
 }
 .UserDialog form>.actions>button:hover{
-	background: #dbdbdb;
-	color: #333;
+	background: #4663F3;
+	color: #fff;
+}
+.UserDialog form >.forgot{
+	color: #4663F3;
 }
 .UserDialog >.forgotPassword> form{
 	padding-bottom: 1em;
@@ -95,9 +113,8 @@
 }
 .UserDialog >.forgotPassword >p{
 	display: inline-block;
-	background: #8a8a8a;
-    color: #333;
-    border-radius: 4px;
+	color: #4663F3;
+	border-bottom: 2px solid #4663F3;
 	font-size: 1em;
 	margin: 1em auto;
 	padding: .5em 1em .5em 1em;
@@ -105,4 +122,5 @@
 .UserDialog >.forgotPassword>form>.return>a{
 	cursor: pointer;
 	text-decoration: none;
+	color: #4663F3;
 }

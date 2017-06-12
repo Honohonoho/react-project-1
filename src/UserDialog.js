@@ -3,8 +3,9 @@ import './UserDialog.css';
 import {signUp,signIn,sendPasswordResetEmail} from './leanCloud';
 import SignInOrSignUp from './SignInOrSignUp';
 import ForgotPasswordForm from './ForgotPasswordForm';
-import Logo from './img/list-todo.png';
+import Logo from './img/logo.png';
 import {DeepCopy} from './DeepCopy';
+// import Canvas from './Canvas';
 
 export default class UserDialog extends Component{
 	constructor(props){
@@ -114,9 +115,12 @@ export default class UserDialog extends Component{
 		return (
 			<div className="UserDialog-Wrapper">
 				<div className="UserDialog">
-					<div className="Logo">
-						<img src={Logo} alt=""/>
-						<p>欢迎使用 ToDoList</p>
+					<div className="Info">
+						<div className="Logo">
+							<img src={Logo} alt=""/>
+							<p>To-Do</p>
+						</div>
+						<div className="text"><p>从工作到休闲，To-Do 都是日常完成任务的最简便方式。</p></div>
 					</div>
 					{
 						this.state.selectedTab === 'signInOrSignUp' ?
