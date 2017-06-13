@@ -7,7 +7,7 @@
 
 - ### 使用的技术
 1.**webpack**（create-react-app 内置了 webpack 的所有功能，所以就当我用了webpack吧，我能说我正在学webpack吗，摔。。）<br>
-2.**React**框架（听说Readux最好在复杂项目才用，好想有机会参与。。）<br>
+2.**React**框架（听说Redux最好在复杂项目才用，好想有机会参与。。）<br>
 3.服务器使用**LeanCloud**（没钱买服务器。。），管理用户和数据。<br>
 
 - ### 完成的功能
