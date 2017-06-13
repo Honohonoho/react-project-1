@@ -6,7 +6,7 @@ export default class SignInOrSignUp extends Component{
     constructor(props){
         super(props)
         this.state = {
-            selected: 'signUp'
+            selected: 'signIn'
         }
     }
     switch(e){

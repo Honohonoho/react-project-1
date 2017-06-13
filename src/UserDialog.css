@@ -51,6 +51,7 @@
 .UserDialog > .signInOrSignUp> nav > label{
 	cursor: pointer;
 	padding: .5em 12px .5em 0;
+	letter-spacing: 4px;
 }
 .UserDialog > .signInOrSignUp> nav > label:hover{
 	color: #4663F3;
@@ -68,15 +69,21 @@
 }
 .UserDialog form>.row{
 	display: flex;
-	padding: .3em 0;
+	padding: 0;
+	font-size: 14px;
 }
 .UserDialog form>.row>input{
 	width: 100%;
 	height: 2em;
 	padding-left: .75em;
-	border: none;
+	border: 1px solid #d5d5d5;
+	border-top: none;
 	outline: none;
-	padding: 1em .8em;
+	padding: 1.5em .8em;
+	letter-spacing: 2px;
+}
+.UserDialog form>.row:nth-child(1){
+	border-top: 1px solid #d5d5d5;
 }
 .UserDialog form>.row>input:focus{
 	background: #fff;
@@ -86,17 +93,16 @@
 	font-size: 1em;
 	line-height: 2em;
 }
-.UserDialog form>.row.actions{
-	display: inline-block;
-}
 .UserDialog form>.actions>button{
 	color: #4663F3;
 	background: #fff;
 	padding: .5em 1em;
+	width: 100%;
 	margin-top: 1em;
 	border: 1px solid #4663F3;
 	border-radius: 4px;
 	cursor: pointer;
+	letter-spacing: 2px;
 }
 .UserDialog form>.actions>button:hover{
 	background: #4663F3;
@@ -104,9 +110,15 @@
 }
 .UserDialog form >.forgot{
 	color: #4663F3;
+	margin-top: 1em;
+}
+.UserDialog >.forgotPassword{
+	width: 20em;
+	height: 19em;
 }
 .UserDialog >.forgotPassword> form{
 	padding-bottom: 1em;
+	margin-top: 2em;
 }
 .UserDialog >.forgotPassword>form>.row:first-child{
 	padding: 0 1em 0 0;
@@ -116,11 +128,14 @@
 	color: #4663F3;
 	border-bottom: 2px solid #4663F3;
 	font-size: 1em;
-	margin: 1em auto;
-	padding: .5em 1em .5em 1em;
+	margin: 2em auto 0 auto;
+	padding: 0 1em .5em 1em;
+}
+.UserDialog >.forgotPassword>form>.return{
+	margin-top: 1em;
+	color: #4663F3;
 }
 .UserDialog >.forgotPassword>form>.return>a{
 	cursor: pointer;
 	text-decoration: none;
-	color: #4663F3;
 }

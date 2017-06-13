@@ -1,44 +1,96 @@
 .App {
   position: relative;
   text-align: center;
-  color: #333;
+  color: #34373d;
   border: 1px solid #aaa;
-  border-radius: 4px;
-  background: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+  background: #EDF2FC;
   margin: 2em auto;
-  padding: 0 1em;
-  min-height: 20em;
+  min-height: 46em;
   min-width: 32em;
   box-shadow: 0 0 1em hsla(0,0%,0%,0.15);
 }
-.App>.inputWrapper>input{
-  outline: none;
+.App >.header {
+  position: relative;
 }
-.App>h1{
-  color: #333;
+.App >.header >img{
+  display: inline-block;
+  width: 38em;
+  overflow: hidden;
 }
-.App>.todoList>li{
-  border: 1px solid #eee;
-  border-radius: 5px;
-  box-shadow: 0 0 .75em #333;
-  margin-bottom: 1em;
-}
-.App>.todoList>li>.ToDoItem>.title{
-  color: #333;
-}
-.App>button{
+.App >.header >p{
   position: absolute;
-  right: .5em;
-  top: 24px;
-  background: #eee;
-  color: #333;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  bottom: 1.5em;
+  width: 50%;
+  font-size: 2em;
+  letter-spacing: 4px;
+  color: #fff;
+}
+.App >.header >p >.icon{
+  background-image: url(./img/dengpao.png);
+  display: inline-block;
+  margin: 0 0.75em;
+  width: 56px;
+  height: 56px;
+}
+.App >.header >button{
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  background: #fff;
+  color: #EC6B6A;
   padding: .5em 1em;
-  border: 1px solid #333;
+  border: 1px solid #EC6B6A;
   border-radius: 4px;
   cursor: pointer;
 }
-.App>button:hover{
-  background: #333;
-  color: #eee;
+.App >.header >button:hover{
+  background: #EC6B6A;
+  color: #fff;
+}
+.App>.inputWrapper {
+  position: absolute;
+  bottom: 0.5em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.App>.inputWrapper >.icon{
+  background-image: url(./img/add.png);
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 0.75em;
+  width: 78px;
+  height: 56px;
+}
+.App>.inputWrapper>input{
+  outline: none;
+  border: 1px solid #4663F3;
+}
+.App>.todoList {
+  max-height: 460px;
+	overflow:auto;
+}
+.App>.todoList::-webkit-scrollbar{
+  width: 10px;
+}
+.App>.todoList::-webkit-scrollbar-button{
+  display: none;
+}
+.App>.todoList::-webkit-scrollbar-track-piece{
+  color: #fff;
+}
+.App>.todoList::-webkit-scrollbar-thumb{
+  background: #4663F3;
+  border-radius: 5px;
+}
+.App>.todoList>li{
+  border-bottom: 1px solid #4663F3;
+  padding: 10px 0;
+  margin: 0 10px;
 }
 

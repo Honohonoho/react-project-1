@@ -1,15 +1,43 @@
 .TodoItem{
 	padding: .5em;
+	padding-right: 0;
+	height: 30px;
 	display: flex;
 	align-items: center;
 }
+.TodoItem > label >.icon {
+	background-image: url(./img/check-0.png);
+	background-position: 0 0;
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	opacity: 0.3;
+}
+.TodoItem > label >.icon:hover{
+	opacity: 1;
+}
+.TodoItem >.checked >.icon {
+	background-image: url(./img/check-1.png);
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	opacity: 1;
+}
+.TodoItem >.checked{
+	text-decoration: line-through;
+	opacity: 0.5;
+}
+.TodoItem > label >input {
+	visibility: hidden;
+}
 .TodoItem>.title{
 	flex-grow: 1;
-	padding: 0 .5em;
+	padding: 0 1em;
+	text-align: left;
 }
 .TodoItem>img{
 	cursor: pointer;
-	opacity: 0.5;
+	opacity: 0.6;
 	width: 28px;
 }
 .TodoItem>img:hover{

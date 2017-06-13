@@ -5,7 +5,6 @@ import SignInOrSignUp from './SignInOrSignUp';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import Logo from './img/logo.png';
 import {DeepCopy} from './DeepCopy';
-// import Canvas from './Canvas';
 
 export default class UserDialog extends Component{
 	constructor(props){

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import 'normalize.css';
 import './reset.css';
 import './App.css';
@@ -6,6 +6,7 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import UserDialog from './UserDialog';
 import {DeepCopy} from './DeepCopy';
+import image from './img/background-image.jpg';
 import {getCurrentUser, signOut, Todomodel} from './leanCloud';
 
 
@@ -45,17 +46,27 @@ class App extends Component {
 		})
 		return (
 			<div className="App">
-				<h1>{this.state.user.username || '我'}的待办事项		
-				</h1>
-				{this.state.user.id ? <button onClick={this.signOut.bind(this)}>注销</button> : null}
-				<div className="inputWrapper">
-					<TodoInput content={this.state.newTodo}
-						onChange={this.changeTitle.bind(this)}
-						onSubmit={this.addTodo.bind(this)} />
+				<div className="header">
+					<img src={image} alt=""/>
+					<p>
+						<span className="icon"></span>
+						<span className="title">{this.state.user.username || '我'}的一天</span>
+					</p>
+					{this.state.user.id ? <button onClick={this.signOut.bind(this)}>注销</button> : null}
 				</div>
 				<ol className="todoList">
 					{todos}
 				</ol>
+				<div className="inputWrapper">
+					<span className="icon" 
+						onClick={this.addTodo.bind(this)}
+						value={this.state.newTodo}
+						>
+					</span>
+					<TodoInput content={this.state.newTodo}
+						onChange={this.changeTitle.bind(this)}
+						onSubmit={this.addTodo.bind(this)} />
+				</div>
 					{this.state.user.id ?
 						null :
                         <UserDialog 
@@ -76,7 +87,19 @@ class App extends Component {
         let stateCopy = DeepCopy(this.state)
         stateCopy.user = user
         this.setState(stateCopy)
-		this.resetToDoList.call(this)
+		// this.resetToDoList.call(this)
+		// let user = getCurrentUser()
+		if(user){
+			let success = (list)=>{
+				let stateCopy = DeepCopy(this.state)
+				stateCopy.todoList = list
+				this.setState(stateCopy)
+			}
+			let error = (error)=>{
+				console.log(error)
+			}
+			Todomodel.loadToDoList(user, success, error)
+		}
     }
 	componentDidUpdate(){
 
@@ -84,7 +107,7 @@ class App extends Component {
 	toggle(e,todo){
 		let oldstatus = todo.status
 		todo.status = todo.status === 'completed' ? '' : 'completed'
-		Todomodel.update(this.state.user, todo, ()=>{  //尝试新写法，第一个箭头函数为success，第二个为error
+		Todomodel.update(this.state.user, todo, ()=>{  //尝试ES6，第一个箭头函数为success，第二个为error
 			this.setState(this.state)
 		},(error)=>{
 			todo.status = oldstatus
@@ -98,8 +121,9 @@ class App extends Component {
 		})
 	}
 	addTodo(event){
+		console.log(event)
 		let newItem = {
-			title: event.target.value,
+			title: this.state.newTodo,
 			status: '',
 			deleted: false
 		}
