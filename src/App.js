@@ -121,7 +121,9 @@ class App extends Component {
 		})
 	}
 	addTodo(event){
-		console.log(event)
+		if(this.state.newTodo === ''){
+			return
+		}
 		let newItem = {
 			title: this.state.newTodo,
 			status: '',
