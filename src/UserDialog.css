@@ -71,6 +71,9 @@
 	display: flex;
 	padding: 0;
 	font-size: 14px;
+	border-top: 1px solid #d5d5d5;
+	border-left: 1px solid #d5d5d5;
+	background: #fff;
 }
 .UserDialog form>.row>input{
 	width: 100%;
@@ -78,12 +81,16 @@
 	padding-left: .75em;
 	border: 1px solid #d5d5d5;
 	border-top: none;
+	border-bottom: none;
 	outline: none;
 	padding: 1.5em .8em;
 	letter-spacing: 2px;
 }
-.UserDialog form>.row:nth-child(1){
-	border-top: 1px solid #d5d5d5;
+.UserDialog .signUp>.row:nth-last-child(2){
+	border-bottom: 1px solid #d5d5d5;
+}
+.UserDialog  .signIn>.row:nth-last-child(3){
+	border-bottom: 1px solid #d5d5d5;
 }
 .UserDialog form>.row>input:focus{
 	background: #fff;
@@ -92,6 +99,10 @@
 	width: 4em;
 	font-size: 1em;
 	line-height: 2em;
+}
+.UserDialog form>.actions{
+	background: none;
+	border: none;
 }
 .UserDialog form>.actions>button{
 	color: #4663F3;
@@ -121,7 +132,7 @@
 	margin-top: 2em;
 }
 .UserDialog >.forgotPassword>form>.row:first-child{
-	padding: 0 1em 0 0;
+	border-bottom: 1px solid #d5d5d5;
 }
 .UserDialog >.forgotPassword >p{
 	display: inline-block;

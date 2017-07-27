@@ -119,7 +119,10 @@ export default class UserDialog extends Component{
 							<img src={Logo} alt=""/>
 							<p>To-Do</p>
 						</div>
-						<div className="text"><p>从工作到休闲，To-Do 都是日常完成任务的最简便方式。</p></div>
+						<div className="text">
+							<p>从工作到休闲</p>
+							<p>To-Do 都是日常完成任务的最简便方式</p>
+						</div>
 					</div>
 					{
 						this.state.selectedTab === 'signInOrSignUp' ?

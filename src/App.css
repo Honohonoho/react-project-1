@@ -93,4 +93,14 @@
   padding: 10px 0;
   margin: 0 10px;
 }
+.ali-icon{
+  width: 1.5em;
+  height: 1.5em;
+  margin: 0.75em 0.75em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  color: #4663F3;
+  font-weight: bold;
+}
 
